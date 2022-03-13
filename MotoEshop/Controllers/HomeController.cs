@@ -20,6 +20,7 @@ namespace MotoEshop.Controllers
             ViewData["Message"] = "Your application description page.";
 
             return View();
+            //zmena
         }
 
         public IActionResult Contact()
