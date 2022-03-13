@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MotoEshop.Models;
+using MotoEshop.Models.DatabaseFake;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,12 +11,12 @@ namespace MotoEshop.Controllers
 {
     public class HomeController : Controller
     {
-        IList<Carousel> carousels = CarouselHelper.GenerateCarousel();
+        IList<Carousel> carousels = DatabaseFake.Carousels;
         public IActionResult Index()
         {
-            var vm = new CarouselViewModel();
-            vm.Carousels = carousels;
-            return View(vm);
+            CarouselViewModel carousel= new CarouselViewModel();
+            carousel.Carousels = carousels;
+            return View(carousel);
         }
 
         public IActionResult About()
