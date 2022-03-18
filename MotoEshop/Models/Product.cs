@@ -8,23 +8,26 @@ using System.Threading.Tasks;
 
 namespace MotoEshop.Models
 {
-    [Table("Carousels")]
-    public class Carousel
+    [Table("Products")]
+    public class Product
     {
         [Key]
         [Required]
         public int ID { get; set; }
         [Required]
-        public string DataTarget { get; set; }
+        public string ProductName { get; set; }
+        [Required]
+        [StringLength(225)]
+        public string ImageSrc { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string ImageAlt { get; set; }
+        [Required]
+        public double Price { get; set; }
         [NotMapped]
         public IFormFile Image { get; set; }
         [Required]
-        [StringLength(255)]
-        public string ImageSrc { get; set; }
-        [Required]
-        [StringLength(25)]
-        public string ImageAlt { get; set; }
-        [Required]
-        public string CarouselContent { get; set; }
+        public string Description { get; set; }
+
     }
 }

@@ -5,30 +5,30 @@ using MotoEshop.Models;
 using MotoEshop.Models.Database;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MotoEshop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CarouselController : Controller
+    public class ProductsController : Controller
     {
         IHostingEnvironment Env;
         readonly EshopDBContext EshopDBContext;
-        
 
-        public CarouselController(EshopDBContext eshopDBContext, IHostingEnvironment env)
+
+        public ProductsController(EshopDBContext eshopDBContext, IHostingEnvironment env)
         {
             this.EshopDBContext = eshopDBContext;
             this.Env = env;
-          
+
         }
         public async Task<IActionResult> Select()
         {
-            CarouselViewModel carousel = new CarouselViewModel();
-            carousel.Carousels = await EshopDBContext.Carousels.ToListAsync();
-            return View(carousel);
+            
+            ProductViewModel product = new ProductViewModel();
+            product.Products = await EshopDBContext.Products.ToListAsync();
+            return View(product);
         }
         public IActionResult Create()
         {
@@ -37,37 +37,36 @@ namespace MotoEshop.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Carousel carousel)
+        public async Task<IActionResult> Create(Product product)
         {
             if (ModelState.IsValid)
             {
-                carousel.ImageSrc = String.Empty;
+                product.ImageSrc = String.Empty;
 
                 FileUpload fup = new FileUpload(Env.WebRootPath, "carousel", "image");
-                carousel.ImageSrc = await fup.FileUploadAsync(carousel.Image);
+                product.ImageSrc = await fup.FileUploadAsync(product.Image);
 
-                EshopDBContext.Carousels.Add(carousel);
+                EshopDBContext.Products.Add(product);
 
                 await EshopDBContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Select));
             }
             else
             {
-                return View(carousel);
+                return View(product);
             }
 
         }
 
-
-
         public IActionResult Edit(int id)
         {
+            Product productItem = EshopDBContext.Products.Where(proI => proI.ID == id).FirstOrDefault();
 
-            Carousel carouselItem = EshopDBContext.Carousels.Where(carI => carI.ID == id).FirstOrDefault();
 
-            if (carouselItem != null)
+
+            if (productItem != null)
             {
-                return View(carouselItem);
+                return View(productItem);
             }
             else
             {
@@ -76,22 +75,26 @@ namespace MotoEshop.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Carousel carousel)
-        {
-            Carousel carouselItem = EshopDBContext.Carousels.Where(carI => carI.ID == carousel.ID).FirstOrDefault();
-
-            if (carouselItem != null && ModelState.IsValid)
+        public async Task<IActionResult> Edit(Product product)
+        {      
+            Product productItem = EshopDBContext.Products.Where(proI => proI.ID == product.ID).FirstOrDefault();
+ 
+            if (productItem != null && ModelState.IsValid)
             {
-                carouselItem.DataTarget = carousel.DataTarget;
-                carouselItem.ImageAlt = carousel.ImageAlt;
-                carouselItem.CarouselContent = carousel.CarouselContent;
+                productItem.ProductName = product.ProductName;
+                productItem.ImageAlt = product.ImageAlt;
+                productItem.Price = product.Price;
+                productItem.Description = product.Description;
+               
 
                 FileUpload fup = new FileUpload(Env.WebRootPath, "carousel", "image");
-                if (String.IsNullOrWhiteSpace(carousel.ImageSrc = await fup.FileUploadAsync(carousel.Image)) == false)
+                if (String.IsNullOrWhiteSpace(product.ImageSrc = await fup.FileUploadAsync(product.Image)) == false)
                 {
-                    carouselItem.ImageSrc = carousel.ImageSrc;
+                    productItem.ImageSrc = product.ImageSrc;
                 }
+
                 await EshopDBContext.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Select));
             }
             else
@@ -102,12 +105,11 @@ namespace MotoEshop.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            
-            Carousel carouselItem = EshopDBContext.Carousels.Where(carI => carI.ID == id).FirstOrDefault();
+            Product productItem = EshopDBContext.Products.Where(proI => proI.ID == id).FirstOrDefault();
 
-            if (carouselItem != null)
+            if (productItem != null)
             {
-                EshopDBContext.Carousels.Remove(carouselItem);
+                EshopDBContext.Products.Remove(productItem);
                 await EshopDBContext.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Select));
@@ -118,4 +120,6 @@ namespace MotoEshop.Areas.Admin.Controllers
             }
         }
     }
+
 }
+
