@@ -9,8 +9,9 @@ namespace MotoEshop.Models.Database
     {
         public static void Initialize(EshopDBContext dBContext)
         {
+            dBContext.Database.EnsureCreated();
 
-            if (dBContext.Database.EnsureCreated())
+            if (dBContext.Carousels.Count() == 0)
             {
                 IList<Carousel> carousels = CarouselHelper.GenerateCarousel();
                 foreach (var item in carousels)
@@ -19,16 +20,18 @@ namespace MotoEshop.Models.Database
                 }
                 dBContext.SaveChanges();
 
+            }
+            if (dBContext.Products.Count() == 0)
+            {
                 IList<Product> products = ProductHelper.GenerateProducts();
                 foreach (var item in products)
                 {
                     dBContext.Products.Add(item);
                 }
                 dBContext.SaveChanges();
+
             }
 
-
-           
         }
     }
 }

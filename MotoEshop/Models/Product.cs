@@ -9,11 +9,8 @@ using System.Threading.Tasks;
 namespace MotoEshop.Models
 {
     [Table("Products")]
-    public class Product
+    public class Product : Entity
     {
-        [Key]
-        [Required]
-        public int ID { get; set; }
         [Required]
         public string ProductName { get; set; }
         [Required]
