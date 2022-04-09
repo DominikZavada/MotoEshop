@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MotoEshop.Models.Database;
 
 namespace MotoEshop.Migrations
 {
     [DbContext(typeof(EshopDBContext))]
-    partial class EshopDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220320211212_MySQL_1_7")]
+    partial class MySQL_1_7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

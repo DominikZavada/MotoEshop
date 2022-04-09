@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using MotoEshop.Models.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,6 +23,7 @@ namespace MotoEshop.Models
         [Required]
         public double Price { get; set; }
         [NotMapped]
+        [FileContentType("image")]
         public IFormFile Image { get; set; }
         [Required]
         public string Description { get; set; }
