@@ -25,7 +25,8 @@ namespace MotoEshop
                 DbInitializer.Initialize(dbContext);
             }
 
-           
+            DbInitializer.EnsureRoleCreated(webHost.Services);
+            DbInitializer.EnsureAdminCreated(webHost.Services);
 
 
             webHost.Run();
