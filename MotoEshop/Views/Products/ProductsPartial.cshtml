@@ -7,7 +7,37 @@
         </div>
         <div class="row">
 
-          
+            @{
+                if (Model != null && Model.Products.Count > 0)
+                {
+
+                    @foreach (var item in Model.Products)
+                    {
+                        <div class="col-lg-4 col-md-6 mb-4" style="height: 500px">
+                            <div class="card h-100">
+                                <a asp-area="" asp-controller="Products" asp-action="Detail" asp-route-id="@item.ID"><img class="card-img-top img-responsive" src="@item.ImageSrc" alt="@item.ImageAlt"></a>
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <b>@item.ProductName </b>
+                                    </h3>
+                                    <h4>  <b>@item.Price Kč</b> </h4>
+                                   
+                                    <h4>@item.Description </h4>
+
+                                </div>
+
+                                <div class="card-footer">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                </div>
+                                <input type="button" class="btn-success" value="Buy" style="font-size:1.4em;text-align:center"
+                                       onclick="Buy(@item.ID, '@Url.Action("AddOrderItemsToSession", "CustomerOrderNotCart", new { Area = "Customer" })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')" />
+
+                            </div>
+
+                        </div>
+                    }
+                }
+            }
 
         </div>
         <!-- /.row -->

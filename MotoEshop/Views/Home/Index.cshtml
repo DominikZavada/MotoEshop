@@ -1,7 +1,5 @@
-﻿@model CarouselViewModel
-@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model dynamic
+
 @section Styles
 {
     <environment include="Development">
@@ -13,7 +11,7 @@
         <link rel="stylesheet" href="~/css/shop_template.min.css">
     </environment>
 }
-
+<!-- Page Content -->
 <div class="container">
     <div class="Row">
         @{
@@ -65,10 +63,13 @@
                 </div>
             }
         }
-    </div>
-    <partial name="../Products/ProductsPartial" />
-</div>
+        @{
 
+            <partial name="../Products/ProductsPartial" />
+        }
+    </div>
+
+</div>
 
 <!-- /.container -->
 @section Scripts {

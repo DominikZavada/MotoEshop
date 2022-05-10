@@ -25,6 +25,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.EventLog" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.19" />
@@ -35,6 +36,14 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Security\Data\" />
     <Folder Include="Areas\Security\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Users\Create.cshtml" />
+    <None Include="Areas\Admin\Users\Delete.cshtml" />
+    <None Include="Areas\Admin\Users\Details.cshtml" />
+    <None Include="Areas\Admin\Users\Edit.cshtml" />
+    <None Include="Areas\Admin\Users\Index.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -34,6 +34,17 @@ namespace MotoEshop
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .ConfigureLogging((hostingContext, Logging) =>
+                {
+                    Logging.ClearProviders();
+                    Logging.AddConsole();
+                    Logging.AddEventSourceLogger();
+                    Logging.AddEventLog(new Microsoft.Extensions.Logging.EventLog.EventLogSettings()
+                    {
+                        SourceName = "UTB.eshop",
+                        LogName = "Application"
+                    });
+                });
     }
 }

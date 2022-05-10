@@ -86,6 +86,8 @@ namespace MotoEshop
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithReExecute("/Home/ErrorCodeStatus", "?statusCode={0}");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

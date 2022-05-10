@@ -1,26 +1,30 @@
 ﻿$.validator.addMethod('filecontent',
-    function (value, element, params) {
+function (value, element, params)
+{
 
-        var filecontentType = params[1];
-        var fileContentTypeFromFile = "";
+    var filecontentType = params[1];
+    var fileContentTypeFromFile = "";
 
-        if (element && element.files && element.files.length > 0) {
-            fileContentTypeFromFile = element.files[0].type;
-        }
+    if (element && element.files && element.files.length > 0)
+    {
+        fileContentTypeFromFile = element.files[0].type;
+    }
 
-        if (!value || fileContentTypeFromFile && fileContentTypeFromFile != "" && fileContentTypeFromFile.toLowerCase().includes(filecontentType.toLowerCase())) {
+    if (!value || fileContentTypeFromFile && fileContentTypeFromFile != "" && fileContentTypeFromFile.toLowerCase().includes(filecontentType.toLowerCase()))
+    {
+        
+        return true;
+    }
 
-            return true;
-        }
+    return false;
 
-        return false;
-
-    });
+});
 
 $.validator.unobtrusive.adapters.add('filecontent', ['type'],
-    function (options) {
-        var element = $(options.form).find('#fileupload')[0];
+function (options)
+{
+    var element = $(options.form).find('#fileupload')[0];
 
-        options.rules['filecontent'] = [element, options.params['type']];
-        options.messages['filecontent'] = options.message;
-    });
+    options.rules['filecontent'] = [element, options.params['type']];
+    options.messages['filecontent'] = options.message;
+});
