@@ -8,8 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MotoEshop.Models;
+using MotoEshop.Models.ApplicationServices;
 using MotoEshop.Models.Database;
-using MotoEshop.Models.Itentity;
+using MotoEshop.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,8 @@ namespace MotoEshop
                 options.LogoutPath = "/Security/Account/Logout";
                 options.SlidingExpiration = true;
             });
+
+            services.AddScoped<ISecurityApplicationService, SecurityIdentityApplicationService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

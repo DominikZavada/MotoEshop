@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using MotoEshop.Models.Itentity;
+using MotoEshop.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

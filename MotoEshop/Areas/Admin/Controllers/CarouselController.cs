@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MotoEshop.Models;
 using MotoEshop.Models.Database;
+using MotoEshop.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +14,7 @@ using System.Threading.Tasks;
 namespace MotoEshop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Manager))]
     public class CarouselController : Controller
     {
         IHostingEnvironment Env;

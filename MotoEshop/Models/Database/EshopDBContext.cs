@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using MotoEshop.Models.Database.Configuration;
 using MotoEshop.Models.Database.Converter;
-using MotoEshop.Models.Itentity;
+using MotoEshop.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
