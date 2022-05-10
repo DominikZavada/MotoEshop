@@ -13,7 +13,9 @@ namespace MotoEshop.Models.Database
     {
         public static void Initialize(EshopDBContext dBContext)
         {
+
             dBContext.Database.EnsureCreated();
+
 
             if (dBContext.Carousels.Count() == 0)
             {
@@ -35,7 +37,6 @@ namespace MotoEshop.Models.Database
                 dBContext.SaveChanges();
 
             }
-
         }
         public async static void EnsureRoleCreated(IServiceProvider serviceProvider)
         {
@@ -51,6 +52,7 @@ namespace MotoEshop.Models.Database
                 }
             }
         }
+
         public async static void EnsureAdminCreated(IServiceProvider serviceProvider)
         {
             using (var services = serviceProvider.CreateScope())

@@ -64,7 +64,20 @@
                                 </ul>
                             </li>
                         }
-                       
+                        @if (User.Identity.IsAuthenticated == true)
+                        {
+                            double totalPrice = 0;
+                            string totalPriceString = "TotalPrice";
+
+                            if (Context.Session.IsAvailable && Context.Session.Keys.Contains(totalPriceString))
+                            {
+                                totalPrice = Context.Session.GetDouble(totalPriceString).GetValueOrDefault();
+                            }
+
+
+                            <li class="navbar-text"><label id="total_price" class="label" style="color:red;font-size:1.4em">@totalPrice.ToString("C2")</label></li>
+
+                        }
 
                     }
                 </ul>
@@ -100,7 +113,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2022 - Kawasaki</p>
+            <p>&copy; 2020 - eshop</p>
         </footer>
     </div>
 

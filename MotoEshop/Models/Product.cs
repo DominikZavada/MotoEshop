@@ -27,6 +27,8 @@ namespace MotoEshop.Models
         public IFormFile Image { get; set; }
         [Required]
         public string Description { get; set; }
+        [Required]
+        public bool Stock { get; set; }
 
     }
 }

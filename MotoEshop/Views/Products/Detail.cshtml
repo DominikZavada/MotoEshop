@@ -10,13 +10,20 @@
                 <h1 class="card-title"><label asp-for="@Model.ProductName" id="productName">@Model.ProductName</label></h1>
 
                 <h2>Price: <label asp-for="@Model.Price">@Model.Price Kč</label></h2>
-              
+                @if (Model.Stock == true)
+                {
+                    <h3 class="text-success"><b>In Stock</b></h3>
+                }
+                else
+                {
+                    <h3 class="text-danger"><b>Not in Stock</b></h3>
+                }
 
                 <p><label asp-for="@Model.Description">@Model.Description</label></p>
 
                 <input type="button" class="btn-success" value="Buy" style="font-size:1.5em"
                        onclick="Buy(@Model.ID,'@Url.Action("AddOrderItemsToSession", "CustomerOrderNotCart", new { Area = "Customer" })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')" />
-                
+                <a asp-action="Dog" asp-route-ID="@Model.ID" asp-route-data="@Model">Watching Dog</a>
             </div>
         </div>
     </div>

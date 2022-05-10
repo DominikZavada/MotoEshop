@@ -21,7 +21,14 @@
                                         <b>@item.ProductName </b>
                                     </h3>
                                     <h4>  <b>@item.Price Kč</b> </h4>
-                                   
+                                    @if (item.Stock == true)
+                                    {
+                                        <h4 class="text-success"><b>In Stock</b></h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="text-danger"><b>Not in Stock</b></h4>
+                                    }
                                     <h4>@item.Description </h4>
 
                                 </div>

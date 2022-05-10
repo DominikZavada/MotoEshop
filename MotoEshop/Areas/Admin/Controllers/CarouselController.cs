@@ -19,14 +19,14 @@ namespace MotoEshop.Areas.Admin.Controllers
     {
         IHostingEnvironment Env;
         readonly EshopDBContext EshopDBContext;
-        
+
 
         public CarouselController(EshopDBContext eshopDBContext, IHostingEnvironment env)
         {
             this.EshopDBContext = eshopDBContext;
             this.Env = env;
-          
         }
+
         public async Task<IActionResult> Select()
         {
             CarouselViewModel carousel = new CarouselViewModel();
@@ -35,7 +35,6 @@ namespace MotoEshop.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
-
             return View();
         }
 
@@ -61,11 +60,8 @@ namespace MotoEshop.Areas.Admin.Controllers
 
         }
 
-
-
         public IActionResult Edit(int id)
         {
-
             Carousel carouselItem = EshopDBContext.Carousels.Where(carI => carI.ID == id).FirstOrDefault();
 
             if (carouselItem != null)
@@ -77,7 +73,6 @@ namespace MotoEshop.Areas.Admin.Controllers
                 return NotFound();
             }
         }
-
         [HttpPost]
         public async Task<IActionResult> Edit(Carousel carousel)
         {
@@ -86,6 +81,7 @@ namespace MotoEshop.Areas.Admin.Controllers
             if (carouselItem != null && ModelState.IsValid)
             {
                 carouselItem.DataTarget = carousel.DataTarget;
+
                 carouselItem.ImageAlt = carousel.ImageAlt;
                 carouselItem.CarouselContent = carousel.CarouselContent;
 
@@ -94,7 +90,9 @@ namespace MotoEshop.Areas.Admin.Controllers
                 {
                     carouselItem.ImageSrc = carousel.ImageSrc;
                 }
+
                 await EshopDBContext.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Select));
             }
             else
@@ -105,7 +103,6 @@ namespace MotoEshop.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            
             Carousel carouselItem = EshopDBContext.Carousels.Where(carI => carI.ID == id).FirstOrDefault();
 
             if (carouselItem != null)

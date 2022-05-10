@@ -70,6 +70,16 @@ namespace MotoEshop
 
             services.AddScoped<ISecurityApplicationService, SecurityIdentityApplicationService>();
 
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -93,6 +103,7 @@ namespace MotoEshop
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

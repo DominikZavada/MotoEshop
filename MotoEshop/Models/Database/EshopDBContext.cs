@@ -20,6 +20,7 @@ namespace MotoEshop.Models.Database
             if (options != null)
                 this.optionsExtention = options.Extensions;
         }
+
         public DbSet<Carousel> Carousels { get; set; }
 
         public DbSet<Product> Products { get; set; }
@@ -29,6 +30,8 @@ namespace MotoEshop.Models.Database
         public DbSet<OrderItem> OrderItem { get; set; }
 
         public DbSet<User> User { get; set; }
+
+        public DbSet<Dog> Dogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -89,7 +92,7 @@ namespace MotoEshop.Models.Database
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new CarouselConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new DogConfiguration());
         }
-
     }
 }
