@@ -16,18 +16,15 @@ namespace MotoEshop.Controllers
     public class HomeController : Controller
     {
         readonly EshopDBContext EshopDBContext;
-        readonly ILogger<HomeController> logger;
 
-        public HomeController(EshopDBContext eshopDBContext, ILogger<HomeController> logger)
+        public HomeController(EshopDBContext eshopDBContext)
         {
             this.EshopDBContext = eshopDBContext;
-            this.logger = logger;
 
         }
 
         public async Task<IActionResult> Index()
         {
-            logger.LogInformation("Index method from HomeController has been called.");
             dynamic model = new ExpandoObject();
 
             var carvm = new CarouselViewModel();
@@ -44,7 +41,6 @@ namespace MotoEshop.Controllers
 
         public IActionResult About()
         {
-            logger.LogInformation("About method from HomeController has been called.");
             ViewData["Message"] = "Your application description page.";
 
             return View();
@@ -52,14 +48,12 @@ namespace MotoEshop.Controllers
 
         public IActionResult Contact()
         {
-            logger.LogInformation("Contact method from HomeController has been called.");
             ViewData["Message"] = "Your contact page.";
 
             return View();
         }
         public IActionResult Products()
         {
-            logger.LogInformation("Product method from HomeController has been called.");
             ViewData["Message"] = "Your product content page.";
 
             return View();
@@ -67,7 +61,6 @@ namespace MotoEshop.Controllers
 
         public IActionResult Privacy()
         {
-            logger.LogInformation("Privacy method from HomeController has been called.");
             return View();
         }
 
@@ -75,7 +68,6 @@ namespace MotoEshop.Controllers
         public IActionResult Error()
         {
             var featureException = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            this.logger.LogError("Exception occured: " + featureException.Error.ToString() + Environment.NewLine + "Exception Path: " + featureException.Path);
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
@@ -85,7 +77,6 @@ namespace MotoEshop.Controllers
 
             string originalURL = String.Empty;
             var features = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
-            this.logger.LogWarning("Status Code: " + statCode + "Original URL: " + originalURL);
             if (features != null)
             {
                 originalURL = features.OriginalPathBase + features.OriginalPath + features.OriginalQueryString;

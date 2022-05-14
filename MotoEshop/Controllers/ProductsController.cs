@@ -16,20 +16,17 @@ namespace MotoEshop.Controllers
     {
         IHostingEnvironment Env;
         EshopDBContext EshopDBContext;
-        readonly ILogger<ProductsController> logger;
         ISecurityApplicationService iSecure;
 
-        public ProductsController(EshopDBContext eshopDBContext, IHostingEnvironment env, ILogger<ProductsController> logger, ISecurityApplicationService iSecure)
+        public ProductsController(EshopDBContext eshopDBContext, IHostingEnvironment env, ISecurityApplicationService iSecure)
         {
             this.EshopDBContext = eshopDBContext;
             this.Env = env;
-            this.logger = logger;
             this.iSecure = iSecure;
         }
 
         public IActionResult Detail(int id)
         {
-            logger.LogInformation("Index method from ProductsController has been called.");
             Product product = EshopDBContext.Products.Where(pro => pro.ID == id).FirstOrDefault();
             return View(product);
         }
@@ -37,7 +34,6 @@ namespace MotoEshop.Controllers
 
         public async Task<IActionResult> Dog(int id)
         {
-            logger.LogInformation("Dog method from ProductsController has been called.");
             User currentUser = await iSecure.GetCurrentUser(User);
             Product product = EshopDBContext.Products.Where(pro => pro.ID == id).FirstOrDefault();
             if (currentUser == null)
@@ -54,7 +50,6 @@ namespace MotoEshop.Controllers
         }
         public IActionResult Error()
         {
-            logger.LogInformation("Error method from ProductsController has been called.");
             return View();
         }
     }

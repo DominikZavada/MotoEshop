@@ -21,32 +21,27 @@ namespace MotoEshop.Areas.Admin.Controllers
     {
         IHostingEnvironment Env;
         readonly EshopDBContext EshopDBContext;
-        readonly ILogger<ProductsController> logger;
 
-        public ProductsController(EshopDBContext eshopDBContext, IHostingEnvironment env, ILogger<ProductsController> logger)
+        public ProductsController(EshopDBContext eshopDBContext, IHostingEnvironment env)
         {
             this.EshopDBContext = eshopDBContext;
             this.Env = env;
-            this.logger = logger;
         }
 
         public async Task<IActionResult> Select()
         {
-            logger.LogInformation("Select method from ProductsController has been called.");
             ProductViewModel product = new ProductViewModel();
             product.Products = await EshopDBContext.Products.ToListAsync();
             return View(product);
         }
         public IActionResult Create()
         {
-            logger.LogInformation("Create method from ProductsController has been called.");
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
-            logger.LogInformation("Create method from ProductsController has been called.");
             if (ModelState.IsValid)
             {
                 product.ImageSrc = String.Empty;
@@ -68,7 +63,6 @@ namespace MotoEshop.Areas.Admin.Controllers
 
         public IActionResult Edit(int id)
         {
-            logger.LogInformation("Edit method from ProductsController has been called.");
             Product productItem = EshopDBContext.Products.Where(proI => proI.ID == id).FirstOrDefault();
 
 
@@ -85,7 +79,6 @@ namespace MotoEshop.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Product product, User user)
         {
-            logger.LogInformation("Edit method from ProductsController has been called.");
             Product productItem = EshopDBContext.Products.Where(proI => proI.ID == product.ID).FirstOrDefault();
             var fromAddress = new MailAddress("eshoputb@gmail.com", "Eshop Kawasaki");
             const string fromPassword = "DominikZavada1+";
@@ -194,7 +187,6 @@ namespace MotoEshop.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            logger.LogInformation("Delete method from ProductsController has been called.");
             Product productItem = EshopDBContext.Products.Where(proI => proI.ID == id).FirstOrDefault();
 
             if (productItem != null)
